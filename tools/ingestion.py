@@ -10,14 +10,15 @@ load_dotenv()
 if __name__ == "__main__":
     print("Loading data...")
     loader = TextLoader(
-        "/Users/krzysztofkokot/Projects/LLM/myOwnProject/intro-to-vector-dbs/mediumblog1.txt")
+        "/Users/krzysztofkokot/Projects/LLM/myOwnProject/intro-to-vector-dbs/mediumblog1.txt"
+    )
     documents = loader.load()
 
     print("Splitting...")
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
     chunks = text_splitter.split_documents(documents)
 
-    embeddings = OpenAIEmbeddings(openai_api_key=os.getenv('OPENAI_API_KEY'))
+    embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))
 
     print("Ingesting...")
     PineconeVectorStore.from_documents(
